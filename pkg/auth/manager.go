@@ -11,9 +11,10 @@ import (
 
 type TokenManager struct {
 	jwtSign string
+	jwtExp  time.Duration
 }
 
-func NewTokenManager(jwtSign string) TokenManager {
+func NewTokenManager(jwtSign string, jwtExp time.Duration) TokenManager {
 	return TokenManager{jwtSign: jwtSign}
 }
 
@@ -28,7 +29,7 @@ func (t TokenManager) GenerateAccessToken(userID, userIP string) (string, error)
 		UserID: userID,
 		UserIP: userIP,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(15 * time.Minute)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(t.jwtExp)),
 		},
 	}
 
