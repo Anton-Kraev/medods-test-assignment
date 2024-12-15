@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/gin-gonic/gin"
 
@@ -26,11 +27,15 @@ type (
 
 	Handler struct {
 		service authService
+		log     *slog.Logger
 	}
 )
 
-func NewHandler(service authService) Handler {
-	return Handler{service: service}
+func NewHandler(service authService, log *slog.Logger) Handler {
+	return Handler{
+		service: service,
+		log:     log,
+	}
 }
 
 func (h Handler) InitRoutes() *gin.Engine {
@@ -43,10 +48,7 @@ func (h Handler) InitRoutes() *gin.Engine {
 	return router
 }
 
-func (h Handler) GenerateTokens(c *gin.Context) {
-	panic("not implemented")
-}
-
-func (h Handler) RefreshTokens(c *gin.Context) {
-	panic("not implemented")
+type tokenResponse struct {
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
 }
