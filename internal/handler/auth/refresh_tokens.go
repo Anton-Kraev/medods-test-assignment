@@ -7,9 +7,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/Anton-Kraev/medods-test-assignment/internal/logger"
 	"github.com/Anton-Kraev/medods-test-assignment/internal/models/auth"
 	"github.com/Anton-Kraev/medods-test-assignment/internal/models/errs"
+	"github.com/Anton-Kraev/medods-test-assignment/pkg/logger"
 )
 
 type refreshTokensRequest struct {

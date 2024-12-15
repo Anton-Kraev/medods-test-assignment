@@ -13,10 +13,7 @@ func (s Service) GenerateTokens(
 ) (auth.AccessToken, auth.RefreshToken, error) {
 	const op = "Service.GenerateTokens"
 
-	accessToken, err := s.tokens.GenerateAccessToken(map[string]any{
-		"UserID": user.ID,
-		"UserIP": user.IP,
-	})
+	accessToken, err := s.tokens.GenerateAccessToken(user.ID, user.IP)
 	if err != nil {
 		return "", "", fmt.Errorf("%s: %w", op, err)
 	}

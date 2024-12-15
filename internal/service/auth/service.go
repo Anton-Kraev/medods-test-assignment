@@ -18,7 +18,7 @@ type (
 	}
 
 	tokenManager interface {
-		GenerateAccessToken(claims map[string]any) (string, error)
+		GenerateAccessToken(userID, userIP string) (string, error)
 		GenerateRefreshToken() (string, string, error)
 		CompareRefreshTokens(token string, tokenHash string) bool
 	}

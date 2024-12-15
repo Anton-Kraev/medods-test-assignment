@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/Anton-Kraev/medods-test-assignment/internal/logger"
 	"github.com/Anton-Kraev/medods-test-assignment/internal/models/user"
+	"github.com/Anton-Kraev/medods-test-assignment/pkg/logger"
 )
 
 type generateTokensRequest struct {

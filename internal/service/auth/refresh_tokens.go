@@ -28,10 +28,7 @@ func (s Service) RefreshTokens(
 		}
 	}
 
-	accessToken, err := s.tokens.GenerateAccessToken(map[string]any{
-		"UserID": user.ID,
-		"UserIP": user.IP,
-	})
+	accessToken, err := s.tokens.GenerateAccessToken(user.ID, userIP)
 	if err != nil {
 		return "", "", fmt.Errorf("%s: %w", op, err)
 	}
