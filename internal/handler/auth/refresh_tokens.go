@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"log/slog"
 	"net/http"
 
@@ -8,6 +9,7 @@ import (
 
 	"github.com/Anton-Kraev/medods-test-assignment/internal/logger"
 	"github.com/Anton-Kraev/medods-test-assignment/internal/models/auth"
+	"github.com/Anton-Kraev/medods-test-assignment/internal/models/errs"
 )
 
 type refreshTokensRequest struct {
@@ -38,7 +40,14 @@ func (h Handler) RefreshTokens(c *gin.Context) {
 	if err != nil {
 		log.Error(errMsg, logger.Err(err))
 
-		c.JSON(http.StatusInternalServerError, gin.H{"error": errMsg})
+		switch {
+		case errors.Is(err, errs.ErrInvalidRefreshToken):
+			c.JSON(http.StatusBadRequest, gin.H{"error": errMsg})
+		case errors.Is(err, errs.ErrSessionNotFound):
+			c.JSON(http.StatusBadRequest, gin.H{"error": errMsg})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"error": errMsg})
+		}
 
 		return
 	}

@@ -9,7 +9,7 @@ import (
 type (
 	sessionRepository interface {
 		Get(ctx context.Context, userID string) (user.User, string, error)
-		Upsert(ctx context.Context, user user.User, refreshToken string) error
+		Insert(ctx context.Context, user user.User, refreshToken string) error
 		UpdateToken(ctx context.Context, userID string, refreshToken string) error
 	}
 

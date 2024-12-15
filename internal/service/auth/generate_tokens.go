@@ -26,7 +26,7 @@ func (s Service) GenerateTokens(
 		return "", "", fmt.Errorf("%s: %w", op, err)
 	}
 
-	err = s.repository.Upsert(ctx, user, refreshTokenHash)
+	err = s.repository.Insert(ctx, user, refreshTokenHash)
 	if err != nil {
 		return "", "", fmt.Errorf("%s: %w", op, err)
 	}

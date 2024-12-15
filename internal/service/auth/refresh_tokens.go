@@ -2,13 +2,11 @@ package auth
 
 import (
 	"context"
-	"errors"
 	"fmt"
 
 	"github.com/Anton-Kraev/medods-test-assignment/internal/models/auth"
+	"github.com/Anton-Kraev/medods-test-assignment/internal/models/errs"
 )
-
-var ErrInvalidRefreshToken = errors.New("refresh token invalid")
 
 func (s Service) RefreshTokens(
 	ctx context.Context, userID string, userIP string, token auth.RefreshToken,
@@ -21,7 +19,7 @@ func (s Service) RefreshTokens(
 	}
 
 	if !s.tokens.CompareRefreshTokens(string(token), refreshToken) {
-		return "", "", fmt.Errorf("%s: %w", op, ErrInvalidRefreshToken)
+		return "", "", fmt.Errorf("%s: %w", op, errs.ErrInvalidRefreshToken)
 	}
 
 	if userIP != user.IP {
