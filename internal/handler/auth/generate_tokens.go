@@ -21,7 +21,7 @@ func (h Handler) GenerateTokens(c *gin.Context) {
 	log := h.log.With(slog.String("endpoint", "Handler.GenerateTokens"))
 
 	var req generateTokensRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := c.ShouldBindBodyWithJSON(&req); err != nil {
 		log.Error(errMsg, logger.Err(err))
 
 		c.JSON(http.StatusBadRequest, gin.H{"error": errMsg})

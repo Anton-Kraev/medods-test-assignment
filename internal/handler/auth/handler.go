@@ -42,8 +42,8 @@ func (h Handler) InitRoutes() *gin.Engine {
 	router := gin.Default()
 
 	authRoute := router.Group("/auth")
-	authRoute.GET("/", h.GenerateTokens)
-	authRoute.GET("/refresh", h.RefreshTokens)
+	authRoute.POST("/", h.GenerateTokens)
+	authRoute.POST("/refresh", h.RefreshTokens)
 
 	return router
 }

@@ -22,7 +22,7 @@ func (r Repository) Get(ctx context.Context, userID string) (user.User, string, 
 	const query = `SELECT * FROM sessions WHERE id = $1`
 
 	var sessions []session
-	if err = pgxscan.Select(ctx, tx, &sessions, query); err != nil {
+	if err = pgxscan.Select(ctx, tx, &sessions, query, userID); err != nil {
 		return user.User{}, "", fmt.Errorf("%s: %w", op, err)
 	}
 

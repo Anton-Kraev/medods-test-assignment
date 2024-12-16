@@ -34,7 +34,7 @@ func (t TokenManager) GenerateAccessToken(userID, userIP string) (string, error)
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
-	signedToken, err := token.SignedString(t.jwtSign)
+	signedToken, err := token.SignedString([]byte(t.jwtSign))
 	if err != nil {
 		return "", err
 	}
